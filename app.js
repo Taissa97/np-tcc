@@ -2,9 +2,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const port = 3001
+const {sequelize} = require('./models/index');
 
-var indexRouter = require('./routes/index');
-var usuarioRoute = require('./routes/usuarioteste-route');
+var usersRouter = require('./routes/usuarioteste-route');
 
 var app = express();
 
@@ -14,7 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+sequelize.sync({ alter: true }).then(()=>{
+    app.listen(port, () => {
+      console.log('Example app listening at http://localhost:'+port)
+    })
+  })
 app.use('/usuarioTeste', usersRouter);
 
 module.exports = app;
