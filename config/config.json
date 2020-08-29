@@ -5,7 +5,13 @@
     "database": "nptcc",
     "freezeTableName": true,
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "define":{
+    "createdAt"   : "data_criacao",
+    "updatedAt"   : "data_modificacao",
+    "deletedAt": "data_exclusao"
+
+    }
   },
   "test": {
     "username": "root",
